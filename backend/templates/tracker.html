@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto bg-gradient-to-b from-blue-950 to-blue-900 p-6 rounded-2xl shadow-2xl mt-8">
+    <h2 class="text-3xl font-bold mb-6 text-white text-center">Job Application Tracker</h2>
+
+    <form method="POST" action="{{ url_for('routes.tracker_add')}}" class="mb-8">
+        <h3 class="text-xl font-semibold mb-4 text-blue-300">Add New Application</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <input type="text" name="company_name" placeholder="Company Name" required
+                class="p-3 rounded-lg bg-blue-950 text-white border border-blue-800 focus:ring-2 focus:ring-blue-500">
+            <input type="text" name="job_title" placeholder="Job Title" required
+                class="p-3 rounded-lg bg-blue-950 text-white border border-blue-800 focus:ring-2 focus:ring-blue-500">
+            <select name="status" class="p-3 rounded-lg bg-blue-950 text-white border border-blue-800 focus:ring-2 focus:ring-blue-500">
+                <option>Applied</option>
+                <option>Interview Scheduled</option>
+                <option>Offer Received</option>
+                <option>Rejected</option>
+            </select>
+            <input type="date" name="applied_date"
+                class="p-3 rounded-lg bg-blue-950 text-white border border-blue-800 focus:ring-2 focus:ring-blue-500">
+        </div>
+        <button type="submit"
+            class="mt-4 w-full bg-gradient-to-r from-blue-700 to-blue-500 text-white px-4 py-3 rounded-xl shadow-lg hover:from-blue-600 hover:to-blue-400 transition-all font-semibold">
+            Add Application
+        </button>
+    </form>
+    <h3 class="text-xl font-semibold mb-4 text-blue-300">All Applications</h3>
+    <div class="overflow-x-auto">
+        <table class="min-w-full border border-blue-800 rounded-xl overflow-hidden">
+            <thead class="bg-blue-900 text-white">
+                <tr>
+                    <th class="p-3 border border-blue-800">ID</th>
+                    <th class="p-3 border border-blue-800">Company</th>
+                    <th class="p-3 border border-blue-800">Job Title</th>
+                    <th class="p-3 border border-blue-800">Status</th>
+                    <th class="p-3 border border-blue-800">Applied Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr class="hover:bg-blue-800 transition-all">
+                    <td class="p-3 border border-blue-800">{{ app[0] }}</td>
+                    <td class="p-3 border border-blue-800">{{ app[1] }}</td>
+                    <td class="p-3 border border-blue-800">{{ app[2] }}</td>
+                    <td class="p-3 border border-blue-800">{{ app[3] }}</td>
+                    <td class="p-3 border border-blue-800">{{ app[4] if app[4] else 'N/A' }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center p-4 text-blue-300">No applications found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}
