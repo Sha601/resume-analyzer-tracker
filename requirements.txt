@@ -1,10 +1,10 @@
-Flask==2.3.3
-spacy==3.6.1
-skillNer==1.0.2
-scikit-learn==1.2.2
-PyMuPDF==1.22.5
-psycopg2-binary==2.9.7
-gunicorn==20.1.0
-python-dotenv==1.0.0
+Flask
+spacy
+skillNer
+scikit-learn
+PyMuPDF
+psycopg2-binary
+gunicorn
+python-dotenv
 
 
