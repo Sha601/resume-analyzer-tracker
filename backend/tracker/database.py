@@ -1,13 +1,21 @@
 import psycopg2
+import os
 
 def get_connection():
-    conn = psycopg2.connect(
-        dbname ="tracker",
-        user="postgres",
-        password ="postgres",
-        host="localhost",
-        port="5432"
-    )
+    # Use DATABASE_URL from environment (Render provides this)
+    database_url = os.environ.get('DATABASE_URL')
+    
+    if database_url:
+        conn = psycopg2.connect(database_url)
+    else:
+        # Fallback for local development
+        conn = psycopg2.connect(
+            dbname="tracker",
+            user="postgres",
+            password="postgres",
+            host="localhost",
+            port="5432"
+        )
     return conn
 
 def init_db():
